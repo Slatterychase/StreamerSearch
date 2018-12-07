@@ -1,0 +1,374 @@
+
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+
+    <title>Streamer Search</title>
+    <meta name="description" content="The HTML5 Herald">
+    <meta name="author" content="SitePoint">
+    <style>
+        /*
+        Css structure borrowed to understand the rotation effect. I altered the direction of rotation as well as placement on page to show understandingof concept and not just copying the source. Names kept same for my own sanity and understanding compared to original.
+        */
+        h1 {
+            font-size: 25px;
+            text-align: center;
+
+            text-transform: capitalize;
+        }
+
+        .mainBox {
+            position: center;
+
+            margin-left: 42%;
+            margin-right: 42%;
+            margin-bottom: 10px;
+            perspective: 1000px;
+            -webkit-perspective: 1000px;
+
+        }
+
+        .start {
+
+            width: 220px;
+            height: 220px;
+            padding: 20px;
+            text-align: center;
+            transition: all .5s ease;
+            left: 42%;
+            border: round;
+            border-radius: 10px;
+            border-style: solid;
+            border-color: #FFFFFF
+        }
+
+        .flipped {
+            position: absolute;
+            top: 0;
+            border: round;
+            border-radius: 10px;
+            border-style: solid;
+            border-color: #FFFFFF;
+            z-index: 1;
+            opacity: 0;
+            width: 220px;
+            height: 220px;
+            padding: 20px;
+            text-align: center;
+            transition: all .5s ease;
+            background-color: #474747;
+            backface-visibility: hidden;
+            transform-style: preserve-3d;
+
+            transform: translateX(110px) rotateY(90deg);
+        }
+
+        .mainBox .start .front-content {
+            position: relative;
+
+            top: 80px;
+
+            transform: translateY(-50%);
+        }
+
+        .mainBox .start .front-content i {
+            font-size: 28px;
+            color: #fff;
+            font-weight: normal;
+        }
+
+        .mainBox .start .front-content h3 {
+            font-size: 25px;
+            color: #fff;
+            text-align: center;
+            margin-bottom: 15px;
+            text-transform: uppercase;
+        }
+
+        .mainBox .flipped h3 {
+            font-size: 15px;
+            font-weight: 700;
+            color: #fff;
+            margin-bottom: 10px;
+            text-transform: uppercase;
+        }
+
+        .mainBox .flipped p {
+            font-size: 30px;
+            color: #b1b1b1;
+            margin: 0;
+            text-align: center;
+            transform: translateY(150%);
+        }
+
+        #playing {
+            transform: translateY(40%);
+        }
+
+        .purple {
+            background-color: #6441A4;
+        }
+
+
+        .mainBox:hover .start {
+            opacity: 0;
+
+            transform: translateX(-110px) rotateY(-90deg);
+        }
+
+        .mainBox:hover .flipped {
+            opacity: 1;
+            /*
+            
+*/
+            transform: rotateY(0);
+        }
+        #bar{
+            display:block;
+            height: 10%;
+            width: 25%;
+           margin:0 auto;
+            margin-bottom: 10px;
+            font-size: 40px;
+             border: round;
+            border-radius: 10px;
+            border-style: solid;
+            border-color: #FFFFFF;
+            opacity: .85;
+            
+           
+        }
+       
+        
+
+        .container {
+            text-align: center;
+            left: 42%;
+            font-family: 'Nanum Gothic', sans-serif;
+        }
+
+        body {
+            background-image: url(background.jpg);
+            
+        }
+        #profileImage{
+            
+            max-height: 100%;
+            max-width: 100%;
+        }
+        
+        #header{
+              display:block;
+            height: 10%;
+            width: 30%;
+           margin:0 auto;
+            margin-bottom: 10px;
+            font-size: 50px;
+             border: round;
+            border-radius: 10px;
+            border-style: solid;
+            border-color: #FFFFFF;
+            opacity: .95;
+            text-align: center;
+            background-color: #6441A4;
+            font-family: 'Nanum Gothic', sans-serif;
+            color: #FFFFFF;
+           
+        }
+    </style>
+
+
+    <title>Service Box Style</title>
+    <link href="https://fonts.googleapis.com/css?family=Nanum+Gothic" rel="stylesheet">
+
+
+
+</head>
+   <div id = "headerContainer">
+    <p id="header">
+        Streamer Search
+    </p>
+    </div>
+    <input id="bar" type="text" placeholder="Search..." onkeypress="return setSearchValue(event)">
+    
+    
+<body>
+ 
+    
+      <div class="container">
+        
+            
+                <div class="mainBox">
+                    <div class="start purple">
+                        <div class="front-content">
+                            <i class="fa fa-trophy"></i>
+                            <h3>
+                            <image id = "profileImage"></image>
+                            </h3>
+                            
+                        </div>
+                    </div>
+                    <div class="flipped">
+                        <h3>Streamer</h3>
+                        <p id="icon"></p>
+                    </div>
+                </div>
+           
+    <div class="container">
+        <div class="row">
+            <div class="col-md-3 col-sm-6 ">
+                <div class="mainBox">
+                    <div class="start purple">
+                        <div class="front-content">
+                            <i class="fa fa-trophy"></i>
+                            <h3>Followers</h3>
+                        </div>
+                    </div>
+                    <div class="flipped">
+                        <h3>Followers</h3>
+                        <p id="followers"></p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3 col-sm-6 ">
+                <div class="mainBox">
+                    <div class="start purple">
+                        <div class="front-content">
+                            <i class="fa fa-anchor"></i>
+                            <h3>Viewers</h3>
+                        </div>
+                    </div>
+                    <div class="flipped">
+                        <h3>Viewers</h3>
+                        <p id="viewers"></p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3 col-sm-6">
+                <div class="mainBox ">
+                    <div class="start purple">
+                        <div class="front-content">
+                            <i class="fa fa-trophy"></i>
+                            <h3>Playing</h3>
+                        </div>
+                    </div>
+                    <div class="flipped">
+                        <h3>Playing</h3>
+                        <p id="playing"></p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3 col-sm-6">
+                <div class="mainBox">
+                    <div class="start purple">
+                        <div class="front-content">
+                            <i class="fa fa-paper-plane-o"></i>
+                            <h3>Youtube Subscribers</h3>
+                        </div>
+                    </div>
+                    <div class="flipped">
+                        <h3>Youtube Subscribers</h3>
+                        <p id = "youtube"></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+
+
+
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script>
+        "use strict";
+        var channelSearch;
+        var followerCount;
+        var twitchLink;
+        var currentViewers;
+        var subs;
+        var user;
+        var game;
+        if(localStorage.getItem("streamer")!= null){
+            user = localStorage.getItem("streamer");
+            channelSearch = localStorage.getItem("streamer");
+        }
+        else{
+            user  = "lirik";
+            channelSearch =   "lirik";
+        }
+        function setSearchValue(e){
+            if(e.keyCode == 13){
+                user = document.getElementById("bar").value;
+                channelSearch = document.getElementById("bar").value;
+                localStorage.streamer = user;
+                document.getElementById("bar").innerHTML = user;
+                getData();
+            }
+            
+        }
+        function getData(){
+             $.ajax({
+            url: 'https://www.googleapis.com/youtube/v3/channels',
+            dataType: 'jsonp',
+            type: 'GET',
+            data: {
+                part: 'statistics',
+                forUsername: user,
+                key: "AIzaSyDZFtxat-DWJjSdu3ngwVaM8ZU9dKsLddo"
+            },
+            success: function(data) {
+               
+                if(data.items[0] != undefined){
+                    
+                   subs = parseInt(data.items[0].statistics.subscriberCount);
+                document.getElementById("youtube").innerHTML = subs;
+                 
+                }
+                else{
+                    
+                     subs = "N/A";
+                document.getElementById("youtube").innerHTML = subs;
+                }
+                
+            }
+        });
+        $.getJSON("https://wind-bow.gomix.me/twitch-api/streams/" + channelSearch + "?callback=?",
+            function(item) {
+                if (item.stream === null) {
+                    followerCount = "Not Live";
+                    game = "Not Live";
+                    currentViewers = "Not Live";
+
+                    document.getElementById("followers").innerHTML = followerCount;
+                    document.getElementById("profileImage").src = "default.png";
+                    document.getElementById("icon").innerHTML = "Not Live";
+                    document.getElementById("viewers").innerHTML = currentViewers;
+                    document.getElementById("playing").innerHTML = game;
+
+                } else if (item.stream === undefined) {
+                    
+                } else {
+                    followerCount = item.stream.channel.followers;
+                    game = item.stream.channel.game;
+                    currentViewers = item.stream.viewers;
+                    
+                    document.getElementById("followers").innerHTML = followerCount;
+                    document.getElementById("profileImage").src = item.stream.channel.logo;
+                    document.getElementById("icon").innerHTML = user;
+                    document.getElementById("viewers").innerHTML = currentViewers;
+                    document.getElementById("playing").innerHTML = game;
+
+                    
+                }
+            });
+            
+        }
+        getData();
+       
+    </script>
+
+</body>
+</html>
